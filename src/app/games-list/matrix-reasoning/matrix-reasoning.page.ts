@@ -49,8 +49,9 @@ export class MatrixReasoningPage implements OnInit {
     private eventemitter: EventemitterService,
     private alertCtrl: AlertController) {}
 
-  ngOnInit() {
-    this.subscription = this.eventemitter.gameStateSubj.subscribe(value =>{
+  ngOnInit() { //Runs on component initilization
+    
+    this.subscription = this.eventemitter.gameStateSubj.subscribe(value =>{ //Subscribe game state from event emitter
       switch(value){
         case 'start':
           this.onStart()
@@ -70,7 +71,7 @@ export class MatrixReasoningPage implements OnInit {
           break
       }}) 
 
-      this.database = this.eventemitter.databaseemitter.subscribe(value => {
+      this.database = this.eventemitter.databaseemitter.subscribe(value => { //Subscribe database from event emitter
         if (value.level){
           this.level = value.level}
         if (value.score){
@@ -86,7 +87,7 @@ export class MatrixReasoningPage implements OnInit {
 
     }}
   
-  shuffle(array) { // Common shuffle algorithm used online
+  shuffle(array) { // Shuffle Array
       for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];
@@ -96,9 +97,10 @@ export class MatrixReasoningPage implements OnInit {
     return array;
     } 
 
-  onStart(){
+  onStart(){ //Start game function
+    
     this.toGet = this.threshold - this.score
-    this.alertCtrl.create({
+    this.alertCtrl.create({ //Game beginning alert
       header: 'Level: ' + this.level,
       message: 'You need' + ' ' + this.toGet +  ' points to go to the next level',
       buttons: [{
@@ -111,7 +113,7 @@ export class MatrixReasoningPage implements OnInit {
       }}]}).then(alert=> alert.present())
   }
 
-  createGame(){
+  createGame(){ //Create a new game
     
    this.gameService.matrixreasoning()
 
@@ -136,8 +138,7 @@ export class MatrixReasoningPage implements OnInit {
   }})
   }
 
-  pick(index: number){
-    console.log("Button is picked")
+  pick(index: number){ //Change button color when picked 
     if (this.picked != true){
     this.picked = true;
     this.answerArray[index].color = "light"
@@ -159,7 +160,7 @@ export class MatrixReasoningPage implements OnInit {
     }
   }}
 
-  checker(){
+  checker(){ //Check if answer is correct and transition between questions
     if (this.excerciseSet === true) {
       this.toGet = null
       if (this.level > this.levels[1]) {
@@ -171,13 +172,13 @@ export class MatrixReasoningPage implements OnInit {
       //this.toGet = this.gameService.scoringconstant - this.cardService.getLevelandScore()[1]
     }
   
-    if(this.answerArray[this.index].value == this.answer){
+    if(this.answerArray[this.index].value == this.answer){ //Check if answer is correct
       this.score+=this.multiplier
       this.toGet = this.threshold - this.score
       let timer = this.gameService.clearTimer()
       this.gameService.storeLevelScore(this.gameno, this.score, this.level, this.excerciseSet, timer,this.wrongs ,this.score-this.multiplier , this.level-1)
   
-      this.alertCtrl.create({
+      this.alertCtrl.create({ //Correct answer alert
         header: 'Correct!',
         message: 'Your Score is' + ' ' + this.score + " points. You need " + this.toGet + " points to finish the level",
         buttons: [{
@@ -191,7 +192,8 @@ export class MatrixReasoningPage implements OnInit {
       
     else{
       this.toGet = this.threshold - this.score
-      this.alertCtrl.create({
+      
+      this.alertCtrl.create({ //Wrong answer alert
         header: 'Wrong Answer',
         message: 'You need' + ' ' + this.toGet +  ' points to go to the next level',
         buttons: [{
@@ -208,10 +210,11 @@ export class MatrixReasoningPage implements OnInit {
       }
   }
 
-  levelCheck(){
+  levelCheck(){ //Transition between levels
+    
     if(this.score >= this.threshold){
       if(this.level >= this.maxLevel){
-        this.alertCtrl.create({
+        this.alertCtrl.create({ //Game complete alert 
           header: 'GAME COMPLETE!!',
           message: 'We hope you enjoyed playing Matrix Reasoning. The Game is over. Exiting will reset the game',
           buttons: [{
@@ -231,9 +234,12 @@ export class MatrixReasoningPage implements OnInit {
       this.level++
       this.score = 0
       this.wrongs = 0
+        
       let timer = this.gameService.clearTimer()
+      
       this.gameService.storeLevelScore(this.gameno, this.score, this.level, this.excerciseSet, timer,this.wrongs ,this.score-this.multiplier , this.level-1)
-       this.alertCtrl.create({
+      
+      this.alertCtrl.create({ //New level alert
       header: 'You have completed the level!',
       message: "",
       buttons: [{
@@ -249,7 +255,7 @@ export class MatrixReasoningPage implements OnInit {
     this.createGame()
   }
 
-  reset(){
+  reset(){ //Reset pick
   this.picked = false
   this.answerArray = []
   this.answer = ""
@@ -258,7 +264,7 @@ export class MatrixReasoningPage implements OnInit {
   this.passed = 0
   }
 
-  onRestart(){
+  onRestart(){ //Restart Game
     this.alertCtrl.create({
       header: 'Are you sure you want to restart this level?',
       buttons: [{
@@ -275,7 +281,7 @@ export class MatrixReasoningPage implements OnInit {
       }}]}).then(alert=> alert.present())
   }
 
-  onResume(){
+  onResume(){ //Resume game
     this.menu.close('pause')
   }
 
