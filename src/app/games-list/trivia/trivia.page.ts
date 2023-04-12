@@ -49,7 +49,7 @@ export class RiddlesPage implements OnInit {
     private alertCtrl: AlertController) {}
 
   ngOnInit() {
-    this.subscription = this.eventemitter.gameStateSubj.subscribe(value =>{
+    this.subscription = this.eventemitter.gameStateSubj.subscribe(value =>{ //Subscribe to game state from event emitter 
       switch(value){
         case 'start':
           this.onStart()
@@ -69,7 +69,7 @@ export class RiddlesPage implements OnInit {
           break
       }}) 
 
-      this.database = this.eventemitter.databaseemitter.subscribe(value => {
+      this.database = this.eventemitter.databaseemitter.subscribe(value => { //Subscribe to database  from event emitter
         if (value.level){
           this.level = value.level}
         if (value.score){
@@ -85,7 +85,7 @@ export class RiddlesPage implements OnInit {
     }
 }
 
-  shuffle(array) { // Common shuffle algorithm used online
+  shuffle(array) { // Shuffle array
     for (var i = array.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var temp = array[i];
@@ -95,7 +95,7 @@ export class RiddlesPage implements OnInit {
   return array;
   } 
 
-  onStart(){
+  onStart(){ //Start Game
     this.toGet = this.threshold - this.score
     this.alertCtrl.create({
       header: 'Level: ' + this.level,
