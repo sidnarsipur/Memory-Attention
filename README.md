@@ -1,2 +1,2 @@
-![Scene](https://imgur.com/jQVMVJ4.png)
+![Scene](https://imgur.com/MskTFn0.png)
 
