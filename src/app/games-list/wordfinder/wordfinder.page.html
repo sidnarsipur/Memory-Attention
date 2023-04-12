@@ -1,0 +1,86 @@
+<app-header [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-header>
+
+<app-description [(gameno)]="gameno" [(gameHasBegun)]="gameHasBegun"></app-description>
+
+<ion-footer>
+  <app-menu [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-menu>
+  <app-start [(gameno)]="gameno" [(gameHasBegun)]="gameHasBegun"></app-start>
+</ion-footer>
+
+<ion-content scroll-y="false" *ngIf="!gameHasBegun"></ion-content>
+<!-- The header displaying what the player has to do -->
+<ion-row *ngIf="gameHasBegun && playGame && !isTen" class="ion-text-center" >
+  <ion-col>
+    <ion-label>Make as many words as you can out of {{storing}}</ion-label>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="gameHasBegun && playGame && !isTen" class="ion-text-center" >
+  <ion-col>
+    <ion-label>If you cannot think of any words hit submit</ion-label>
+  </ion-col>
+</ion-row>
+<div  *ngIf="gameHasBegun && playGame && !isTen" class = "ion-text-center">
+  <app-score *ngIf="gameHasBegun" [(level)]="level" [(score)]="scoring"></app-score>
+</div>
+<ion-content *ngIf="gameHasBegun && playGame && !isTen">
+  <ion-row>
+    <!-- Displays the letters individually -->
+    <ion-col *ngFor="let letter of wordarray; let i = index" size = "4">
+      <ion-button style = "width: 80%" class = "shadow" (click)="wordCheck(letter, i)" size="large" color="medium" [disabled]="disabledarray[i]">{{ letter | titlecase }} </ion-button>
+    </ion-col>
+  </ion-row>
+  <!-- Redo, Add word, and submit button -->
+  <ion-row class = "ion-text-center">
+    <ion-col>
+      <ion-button (click) = "redoIt()" class = "shadow" style = "width: 80%">Reset</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button [disabled] = "doneDisabled()" (click) = "check()"  class = "shadow" style = "width: 80%">Add Word</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button (click) = "testClick()" class = "shadow" style = "width: 80%">Submit</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let cvb of currentWordList" size = "4" class = "ion-text-center">
+      <ion-button color = "warning" style = "width: 80%" [disabled] = "false" size = "large" class = "shadow"><ion-text ><h2>{{cvb}}</h2></ion-text></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-content *ngIf = "wordGot && !isTen">
+<div >
+  <!-- Adds a real word made by the player to the correct array -->
+  <ion-row *ngIf = "!correctEmpty">
+    <ion-col>
+      <ion-label>correct = {{correct}}</ion-label>
+    </ion-col>
+  </ion-row>
+  <!-- Of the word the player made was not a real word it will go in the incorrect array -->
+  <ion-row *ngIf = "!incorrectEmpty">
+    <ion-col>
+      <ion-label>incorrect = {{incorrect}}</ion-label>
+    </ion-col>
+  </ion-row>
+  <!-- The score is displayed and saved here -->
+  <ion-row>
+    <ion-col>
+      <ion-label>score = {{scoring}}</ion-label>
+    </ion-col>
+  </ion-row>
+  <!-- If they advance to a new level this message appears -->
+  <div *ngIf = "newLev && !isTen"> 
+    <ion-row >
+      <ion-col>
+        <ion-label > Congrats you are now on level {{congratsShow()}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-row>
+    <ion-col>
+      <ion-button class = "lower-content" (click) = onStart()>play again</ion-button>
+    </ion-col>
+  </ion-row>
+
+  </div>
+  
+</ion-content>

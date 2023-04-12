@@ -1,0 +1,196 @@
+<!--
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar class="ion-text-center">
+      <ion-title style="font-size: 32px;">Home</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+<!-- 
+    <ion-list>
+    <ion-item *ngFor="let game of gamesArray" (click)="onClickChip(game.name)" button>
+      <ion-thumbnail slot="start">
+        <img [src]="game.thumbnailURL">
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{ game.name }}</h3>
+        <p>{{ game.catchphrase }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list> -->
+
+  <!--
+  <ion-list *ngIf="detailMode">
+    <ion-item>
+      <ion-icon slot="start" (click)="onCheckGame()" name="chevron-back-outline"></ion-icon>
+      <ion-label>
+        <h1>{{ index }}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngFor="let session of sessionData[index]">
+      <ion-item>
+        <ion-label>
+          <h3>{{ session.date|date }}</h3>
+          <h3>{{ 'Level: ' + session.level }}</h3>
+          <h3>{{ 'Score: ' + session.score }}</h3>
+          <h3>{{ 'Time: ' + session.time + 's' }}</h3>
+          <h3>{{ 'Wrongs: ' + session.wrongs }}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="!detailMode">
+    <ion-item *ngFor="let game of gamesArray; index as i" detail (click)="onCheckGame(game.name)">
+      <ion-label>
+        {{ game.name }}
+      </ion-label>
+    </ion-item>
+  </ion-list> -->
+  <!-- <app-spinner></app-spinner> -->
+<!-- </ion-content> -->
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center" size="large">
+      Welcome back!
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header> -->
+
+<!-- stats + rewards needs to be developed -->
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="start">
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- collapsible header -->
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" >
+    <ion-toolbar color="start">
+      <ion-title class="ion-text-center" size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--  Welcome Back! sign -->
+  <ion-grid scroll-y="false">
+    <ion-row>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row class="padding-top: 20%; padding-bottom: 20%">
+      <ion-col class="ion-text-center">
+        <ion-label style="font-weight: bold; font-size: 22px;">Welcome back!</ion-label>
+      </ion-col>
+
+    </ion-row >
+    <ion-row>
+      <ion-col></ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col size="3.66" offset="0.25" class="ion-text-center" class="shadow">
+        <ion-list lines="none" class="ion-text-center">
+          <ion-item lines="none">
+            <img src="/assets/home icons/rewards.png" (click)="toRewards()" style="width: 100%; height: 80%;">
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-center"> {{r}} </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="3.66" offset="0.25" class="ion-text-center" class="shadow">
+        <ion-list lines="none">
+          <ion-item lines="none">
+            <img src="/assets/home icons/games_logo.png" (click)="toRewards()" style="width: 100%; height: 80%;">
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-center"> {{g}} </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="3.66" offset="0.25" class="ion-text-center" class="shadow">
+        <ion-list lines="none">
+          <ion-item lines="none">
+            <img src="/assets/home icons/statistics.png" (click)="toRewards()" >
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-center"> {{s}} </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row> -->
+
+    <!--  the three icons for games statistics and rewards -->
+
+    <ion-row>
+      <ion-col size="4" class="ion-text-center" (click)="toRewards()">
+        <div class="shadow" style="width: 100%; height: 100%;">
+          <img src="/assets/home icons/rewards.png" style="width: 70%; height: 70%; padding-bottom: 5%;">
+          <ion-label>{{ r }}</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center" (click)="toGames()">
+        <div class="shadow" style="width: 100%; height: 100%;">
+          <img src="/assets/home icons/games_logo.png" style="width: 70%; height: 70%; padding-bottom: 5%;">
+          <ion-label>{{ g }}</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center" (click)="toStats()">
+        <div class="shadow" style="width: 100%; height: 100%;">
+          <img src="/assets/home icons/statistics.png" style="width: 70%; height: 70%; padding-bottom: 5%;">
+          <ion-label>{{ s }}</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!--  row of padding -->
+    <ion-row>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <!-- the activity log -->
+    <div style="border: 3px solid #154FE6; border-radius: 8px" >
+      <ion-row>
+        <ion-col>
+          <ion-label>Activity log</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngFor="let item of daysOfWeek" class="ion-text-center" size="1.2" offset="3.6/9">
+          <ion-label>{{ item }}</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngFor="let item of colorsOfWeek" class="ion-text-center" size="1.2" offset="3.6/9">
+          <ion-chip [class]="item" disabled="true" style="width: same-as-height; height: 100%;"> </ion-chip>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col></ion-col>
+      </ion-row>
+    </div>
+
+    <!-- <ion-row>
+      <ion-col size="4" class="ion-text-center">
+        {{ r }}
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        {{ g }}
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        {{ s }}
+      </ion-col>
+    </ion-row> -->
+  </ion-grid>
+</ion-content>

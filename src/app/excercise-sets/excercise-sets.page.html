@@ -1,0 +1,93 @@
+<ion-header *ngIf="!finalishidden">
+  <ion-toolbar style="--border-width: 0">
+    <ion-buttons slot="start">
+      <ion-button color="dark" routerLink="/home">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-size: 20px;">Final Results</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-header *ngIf="!setsHaveStarted">
+  <ion-toolbar style="--border-width: 0">
+    <ion-buttons slot="start">
+      <ion-button color="dark" routerLink="/home">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-size: 20px;">Exercise Sets</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- <ion-content>
+<app-card-span></app-card-span>
+<app-digit-span></app-digit-span>
+</ion-content> -->
+
+
+
+<!-- <div scrollY="false" *ngIf="finalishidden">
+    <app-digit-span *ngIf="!hiddenArray[0]" [excerciseSet]="true" [levels]="levels"></app-digit-span>
+    <app-riddles *ngIf="!hiddenArray[1]" [excerciseSet]="true"></app-riddles>
+    <app-card-span *ngIf="!hiddenArray[2]" [excerciseSet]="true" [levels]="levels"></app-card-span>
+    <app-traffic-light *ngIf="!hiddenArray[3]" [excerciseSet]="true" [levels]="levels"></app-traffic-light>
+    <app-sort-them *ngIf="!hiddenArray[4]" [excerciseSet]="true" [levels]="levels"></app-sort-them>
+    <app-word-pairs *ngIf="!hiddenArray[5]"></app-word-pairs>
+    <app-word-to-images *ngIf="!hiddenArray[6]" [excerciseSet]="true" [levels]="levels" [spclVar]="spclVar"></app-word-to-images>
+    <app-stroop-game *ngIf="!hiddenArray[7]"></app-stroop-game>
+    <app-wordfinder *ngIf="!hiddenArray[8]"></app-wordfinder>
+    <app-choosing *ngIf="!hiddenArray[9]" [choices]="choices" [answers]="answers"></app-choosing>
+</div> -->
+
+<!-- This is the main exercise set component. In the first section is the start screen with the start button before the exercise set. The second section is basically the component forms
+    of the different games. The excerciseSet property basically just tells the game that it should be in the excerciseSet mode. The levels property feeds the games what levels they should display and the spclVar
+    is for any extra variables that these games need. For example, word to images in ex set 1 is in mode 1 and it is in mode 2 in ex set 2 and so the spclVar feeds this mode to the component. In section 3 is the 
+    part that is displayed after the excercise sets which shows the score and will show maybe stars  and will have a restart and back to home button. -->
+
+<!-- This component is mostly done except it needs to be tested and the games need to be integrated.
+    Additionally, the final screen needs to be built. -->
+
+<!-- Section 1 -->
+<ion-content *ngIf="!setsHaveStarted"  scrollY="false">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-label>TEXT</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button (click)="setsHaveStarted = true">Begin Exercise Set</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<!-- Section 2 -->
+  <div class="ion-content" style="height: 100%;" *ngIf="setsHaveStarted">
+    <app-digit-span *ngIf="!hiddenArray[0]" [excerciseSet]="true" [levels]="levels"></app-digit-span>
+    <app-riddles style="height: 82%;" *ngIf="!hiddenArray[1]" [excerciseSet]="true"></app-riddles>
+    <app-card-span style="height: 82%;" *ngIf="!hiddenArray[2]" [excerciseSet]="true" [levels]="levels"></app-card-span>
+    <app-traffic-light style="height: 82%;" *ngIf="!hiddenArray[3]" [excerciseSet]="true" [levels]="levels"></app-traffic-light>
+    <app-sort-them style="height: 72%;" *ngIf="!hiddenArray[4]" [excerciseSet]="true" [levels]="levels"></app-sort-them>
+    <app-word-pairs style="height: 82%;" *ngIf="!hiddenArray[5]"></app-word-pairs>
+    <app-stroop-game style="height: 82%;" *ngIf="!hiddenArray[7]"></app-stroop-game>
+    <app-wordfinder style="height: 82%;" *ngIf="!hiddenArray[8]"></app-wordfinder>
+    <app-choosing style="height: 82%;" *ngIf="!hiddenArray[9]" [choices]="choices" [answers]="answers"></app-choosing>
+    <app-word-to-images style="height: 82%;" *ngIf="!hiddenArray[6]" [excerciseSet]="true" [levels]="levels" [spclVar]="spclVar"></app-word-to-images>
+  </div>
+
+
+<!-- Section 3 -->
+<ion-content *ngIf="!finalishidden">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label>Score: {{aggregatescore}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{ currentGame }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <img [src]="imgURL">           
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>
+          <h1>{{ currentGame }}
+          <ion-chip color="primary" (click)="onClickChip()">
+            <ion-label>Play</ion-label>
+            <ion-icon name="play-outline"></ion-icon>
+          </ion-chip>            
+          </h1>
+        </ion-label>   
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col> 
+        <ion-label>{{ desc }}</ion-label>          
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

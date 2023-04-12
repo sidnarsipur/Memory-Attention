@@ -1,0 +1,43 @@
+<app-header [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-header>
+<app-description [(gameHasBegun)]="gameHasBegun" [(startButtonIsDisabled)]="startButtonIsDisabled" [(gameno)]="gameno"></app-description>
+
+<app-score *ngIf="gameHasBegun" [(level)]="level" [(score)]="score"></app-score>
+
+<ion-content>
+
+<ion-label color="dark" *ngIf="gameHasBegun"><strong>Complete the Pattern with the correct option</strong></ion-label>
+
+<img [src]="photoaddress + currentItem" *ngIf="gameHasBegun">  
+
+<div class="main">
+  <ion-button
+    [disabled] = "answer.disabled"
+    color = "{{ answer.color }}"
+    (click) = "pick(ind)"
+    size = "small"
+    *ngFor = "let answer of answerArray, index as ind">
+   {{ answer.value }}
+  </ion-button>
+</div>
+
+<div class="submit">
+  <ion-button
+    *ngIf = "picked"
+    class="main"
+    color="warning"
+    expand = "block"
+    (click)="checker()">
+    Submit  
+ <ion-icon 
+    name="enter-outline"
+    size="large">
+</ion-icon>
+</ion-button>
+</div>
+
+</ion-content>
+
+<ion-footer>
+    <app-menu [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-menu>
+    <app-start [(gameHasBegun)]="gameHasBegun" [(gameno)]="gameno"></app-start>
+  </ion-footer>

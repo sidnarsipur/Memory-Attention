@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar color="start">
+    <ion-title>Exercise Sets</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <!--  the collapsible header -->
+
+<ion-content scroll-y="false">
+  <ion-header collapse="condense">
+    <ion-toolbar class="ion-text-center" color="start">
+      <ion-title style="font-size: 32px;">Exercise Sets</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <!-- <ion-list>
+    <ion-list-header>
+      Excercise Set 1
+    </ion-list-header>
+    
+    <ion-list-header>
+      Excercise Set 2
+    </ion-list-header>
+  </ion-list> -->
+  <!-- <ion-list>
+    <ion-item *ngFor="let item of returnExSetAray(); index as i" (click)="onExcerciseSet(i + 1)">
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/word-to-images/11.jpg">
+      </ion-thumbnail>
+      <ion-label>
+        <h3>Excercise Set {{i + 1}}</h3>
+        <p>Level from: {{ item.level[0] }}, Level to: {{ item.level[1] }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list> -->
+  <!-- <ion-card > -->
+
+    <!-- <ion-card-header>
+      <ion-card-title>Exercise Set 1</ion-card-title>
+      <ion-card-subtitle>For memory and attention</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>Includes sort them!, Card Span, Digit Span, </ion-card-content>
+  </ion-card>
+  <ion-card (click)="onExcerciseSet(2)">
+    <img src="../../../assets/word-to-images/3.jpg">
+    <ion-card-header>
+      <ion-card-title>Exercise Set 2</ion-card-title>
+      <ion-card-subtitle>For memory and attention</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>Includes sort them!, Card Span, Digit Span, </ion-card-content>
+  </ion-card> -->
+
+  <!-- the image and buttons for exercise set 1 -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-text-center" style="--background: #E03B594F;">
+          <img style="width: 100%; height: 100%;" src="../../../assets/exercise-set/exset1-icon.png">
+          <ion-card-header>
+            <ion-card-title style="font-size: 20px;">Exercise Set 1</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+        <ion-list>
+          <div class="ion-text-center">
+            <ion-label>Difficulty</ion-label>
+          </div>
+          <div class="ion-text-center">
+            <ion-button fill="outline" color="danger" *ngFor="let item of array"  (click)="onExcerciseSet((item - 1)*2 + 1)">{{ item }}</ion-button>
+          </div>
+        </ion-list>
+      </ion-col>
+
+    <!--  the image and buttonss for exercise set 2 -->
+      <ion-col>
+        <ion-card class="ion-text-center" style="--background: #3BB9E04F;">
+          <img style="width: 100%; height: 100%;" src="../../../assets/exercise-set/exset2-icon.png">
+          <ion-card-header>
+            <ion-card-title style="font-size: 20px;">Exercise Set 2</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+        <ion-list>
+          <div class="ion-text-center">
+            <ion-label>Difficulty</ion-label>
+          </div>
+          <div class="ion-text-center">
+            <ion-button fill="outline" *ngFor="let item of array"  (click)="onExcerciseSet(item*2)">{{ item }}</ion-button>
+          </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

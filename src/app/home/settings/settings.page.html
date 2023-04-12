@@ -1,0 +1,33 @@
+<!-- maybe more settings need to be added -->
+
+<!-- logout function -->
+<ion-header>
+  <ion-toolbar color="start">
+    <ion-title>Settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onLogout()">Logout</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!--  level changer -->
+<ion-content *ngIf="!isLoading">
+  <ion-list>
+    <ion-item>
+      <ion-label class="ion-text-center bold" >Level</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-range [(ngModel)]="level" pin snaps="true" step="1" min="1" max="10">
+        <ion-label slot="start">1</ion-label>
+        <ion-label slot="end">10</ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-item detail button (click)="levelChange()">
+      Level Change
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+

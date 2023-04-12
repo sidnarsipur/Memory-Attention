@@ -1,0 +1,38 @@
+.maxopacity {
+    opacity: 0.25;
+  }
+  
+  .displaycontainer {
+    position: relative;
+  }
+  
+  .bottomright {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height:fit-content;
+    color: white;
+    text-align: center;
+    background-color: #ffffff;
+  }
+
+  .button {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 10px;
+    letter-spacing: 0.25em;
+    
+    color: #FFFDFD;
+    }
+    .fonts{
+      font-family: 'Lato-Light';
+    font-weight: 'Bold';
+    text-transform: capitalize;
+    }

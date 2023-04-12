@@ -1,0 +1,43 @@
+<app-header [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-header>
+<app-description [(gameHasBegun)]="gameHasBegun" [(startButtonIsDisabled)]="startButtonIsDisabled" [(gameno)]="gameno"></app-description>
+
+<app-score *ngIf="gameHasBegun" [(level)]="level" [(score)]="score"></app-score>
+
+<ion-content class="background" *ngIf="gameHasBegun">
+
+  <h3 style="text-align: center"><strong>{{ question }}</strong></h3>
+
+  <div class="main">
+    <ion-button
+      [disabled] = "answer.disabled"
+      (click) = "pick(ind)"
+      color = "{{ answer.color }}"
+      expand = "block"
+      *ngFor = "let answer of answerArray, index as ind">
+     {{ answer.value }}
+    </ion-button>
+  </div>
+
+  <div class="submit">
+    <ion-button
+      *ngIf = "picked"
+      class="main"
+      color="warning"
+      expand = "block"
+      (click)="checker()">
+      Submit  
+   <ion-icon 
+      name="enter-outline"
+      size="large">
+  </ion-icon>
+  </ion-button>
+</div>
+
+</ion-content>
+
+
+
+<ion-footer>
+  <app-menu [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-menu>
+  <app-start [(gameHasBegun)]="gameHasBegun" [(gameno)]="gameno"></app-start>
+</ion-footer>

@@ -1,0 +1,25 @@
+<div *ngIf="!gameHasBegun" scroll="true">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <img [src]="gameimgurl" style="width: 161px; height: 161px;">
+
+      </ion-col>
+    </ion-row>
+    <!-- did this since i could not scroll meaning i couldn't test the firebase intergration -->
+    <ion-row *ngFor="let desc of gamedesc">
+      <ion-col size-md="8" offset-md="2" class="ion-text-left">
+        <ion-label style="font-family: Roboto; font-size: 12pt;">{{ desc }}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-label class="areyouready" color="start">Are you ready?</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid> 
+</div>

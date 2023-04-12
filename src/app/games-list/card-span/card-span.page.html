@@ -1,0 +1,112 @@
+<app-header [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-header>
+
+<app-description [(gameHasBegun)]="gameHasBegun" [(gameno)]="gameno"></app-description>
+
+<app-score *ngIf="gameHasBegun" [(level)]="getLevelandScore()[0]" [(score)]="getLevelandScore()[1]"></app-score>
+
+<ion-content *ngIf="!gameHasBegun && !excerciseMode"></ion-content>
+
+<!-- This game is mostly complete but the menu functions need to be tested and figured out. -->
+
+<!-- the game itself -->
+<ion-content *ngIf="gameHasBegun">
+
+    <!-- <ion-item color="danger" *ngIf="wrong">
+      <ion-label class="ion-text-center">Incorrect Answer!</ion-label>
+    </ion-item> -->
+    <!-- <ion-item color="dark" *ngIf="correct" >
+      <ion-label class="ion-text-center" >Good Job! Correct Answer!</ion-label>
+    </ion-item> -->
+
+    <!-- This part is the selecting screen of the game after the cards are displayed -->
+    <ion-row *ngIf="!cardCountIsHidden">
+      <ion-col class="ion-text-center">
+        <ion-label>Card: {{ formIsHidden ? getI() + 1 : cardCount + 1 }}</ion-label>
+      </ion-col>
+    </ion-row>
+  <ion-grid *ngIf="gameHasBegun && !formIsHidden">
+      <ion-row>
+        <ion-col *ngFor="let suite of formSuites" size-md="2" offset-md="0.75" offset-lg="1.5" size-lg="1">
+          <ion-card button="true" [disabled]="selectedCard === suite" (click)="onSelectCard(suite)" >
+            <img [src]="'../../assets/cards/card-suites' + '/' + suite + '.png'">            
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    <div *ngIf="suiteIsSelected">
+        <ion-row class="ion-text-center">
+          <ion-col *ngFor="let card of cardsArray"  size-md="2" offset-md="0.75">
+            <div class="ion-text-center">
+              <ion-chip [color]="getColor(card.suite)" outline style="background-color: white" (click)="onChipClicked(card.suite, card.name, card.imgURL)">
+                <!-- <ion-avatar>
+                  <img [src]="'../../assets/cards/card-suites/' + card.imgURL"> >
+                </ion-avatar> -->
+                <div class="card">
+                  <ion-label>{{ card.name }}</ion-label>
+                </div>                  
+              </ion-chip>
+            </div>
+          </ion-col>
+        </ion-row>
+        <div class="ion-text-center">
+          <ion-row>
+            <ion-col>
+              <ion-label>Picked Cards (Click to delete):</ion-label>
+            </ion-col>
+          </ion-row>
+        </div>
+          <ion-row>
+            <ion-col (click)="onDeleteItem(i)" *ngFor="let card of answerCards; let i = index" size="3" size-md="2" offset-md="0.75">
+              <ion-chip [color]="getColor(card.suite)" outline style="background-color: white">
+                <ion-avatar>
+                  <img [src]="'../../assets/cards/card-suites/' + card.imgURL"> >
+                </ion-avatar>
+                <div class="card">
+                  <ion-label>{{ card.name }}</ion-label>
+                </div> 
+                <!-- <ion-icon name="close-sharp" ></ion-icon>                 -->
+              </ion-chip>
+            </ion-col>
+          </ion-row>    
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-center">
+              <ion-button color="light" (click)="onSubmit()" [disabled]="submitButton()">Submit</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+    </div>
+  </ion-grid>
+
+  <!-- This part makes up the cards that are animated through angular animations -->
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center" size="auto" [class]="opacity" #currentNumber [@cardFade]="isFaded" offset="1" size="10" size-md="6" size-lg="4" >
+        <div *ngIf="gameHasBegun && formIsHidden">
+          <ion-card>
+            <img  width-md="480" height-md="733.5" [src]="cardRoute">
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- <ion-footer *ngIf="gameHasBegun">
+  <ion-toolbar>
+    <ion-title>
+      Level: {{ getLevelandScore()[0] }}; Score: {{ getLevelandScore()[1] }} 
+    </ion-title>
+    <ion-buttons slot="end"><ion-button (click)="onPopup()"></ion-button></ion-buttons>
+    <ion-buttons>
+      <ion-button (click)="onPopup()"> </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer> -->
+
+<!-- Common element -->
+<ion-footer>
+  <app-menu [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-menu>
+  <app-start [(gameHasBegun)]="gameHasBegun" [(gameno)]="gameno"></app-start>
+</ion-footer>
+
+

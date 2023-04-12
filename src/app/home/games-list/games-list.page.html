@@ -1,0 +1,53 @@
+  <ion-header>
+    <ion-toolbar color="start">
+      <ion-title style="font-size: 22px;">Games</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--  the collapsible header -->
+
+  <ion-content>
+    <ion-header collapse="condense">
+       <ion-toolbar color="start">
+         <ion-title class="ion-text-center" style="font-size: 32px;">Games</ion-title>
+       </ion-toolbar>
+    </ion-header>
+      <!-- <ion-list>
+        <ion-item *ngFor="let game of gamesArray" (click)="onClickChip(game.name)" button>
+          <ion-thumbnail slot="start">
+            <img [src]="game.thumbnailURL">
+          </ion-thumbnail>
+          <ion-label>
+            <h3>{{ game.name }}</h3>
+            <p>{{ game.catchphrase }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list> -->
+
+      <!-- icons for all the games -->
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center" *ngFor="let game of displayarray" (click)="onClickChip(game.name)" size="3" offset="2">
+            <img style="border: 3px solid var(--ion-color-dark); border-radius: 10px; width: 100%;" *ngIf="game.img === true" [src]="game.imageURL">
+            <label style="font-size: 15; font-weight: 700;" *ngIf="!game.img === false">{{ game.name }}</label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <ion-grid>
+        width: 85px; height: 85px;
+        <ion-row >
+          <ion-col style="height: 130px;" size="4" offset="1" *ngFor="let game of gamesArray" (click)="onClickChip(game.name)">
+              <div style="position: absolute; width: 80px; height: 80px;" padding>
+                <img style="width: 100%; height: 100%;" [src]="game.thumbnailURL" >
+              </div>
+              <div style="position: relative; top: 90px">
+                <p>{{ game.name }}</p>
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+
+
+
+  </ion-content>
+

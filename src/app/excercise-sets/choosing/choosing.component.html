@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Choose the answer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- this component is shown after the last game in the exercise set and it 
+  basically shows the images/words that loops three times in word to images at the start of the exercise set-->
+
+  <!-- This component is mostly done except for maybe some UI changes -->
+
+<ion-content>
+  <ion-list *ngIf="!imgmode">
+    <ion-item *ngFor="let choice of choicesarray">
+      <ion-label>{{ choice.val.split("_").join(" ") }}</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="choice.isChecked"></ion-checkbox>
+    </ion-item>
+    <ion-item button (click)="onSubmit()">
+      <ion-label>Submit</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-grid *ngIf="imgmode">
+    <ion-row >
+      <ion-col size="4" offset="0" *ngFor="let entry of choicesarray; index as i">
+        <div>
+          <img [src]="'../../assets/word-to-images/' + entry.val " (click)="onClick(i)" [class]="getClass(i) === true ? '' : 'maxopacity'">
+          <div class="container bottomright" *ngIf="getClass(i) === true ? false : true"><ion-icon name="checkmark-circle"></ion-icon></div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button (click)="onSubmit()">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <ion-list *ngIf="imgmode">
+    <ion-item *ngFor="let choice of choicesarray">
+      <img [src]="'../../assets/word-to-images/' + choice.val">
+      <ion-checkbox slot="start" [(ngModel)]="choice.isChecked"></ion-checkbox>
+    </ion-item>
+    <ion-item button (click)="onSubmit()">
+      <ion-label>Submit</ion-label>
+    </ion-item>
+  </ion-list> -->
+</ion-content> 

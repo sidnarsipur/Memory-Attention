@@ -1,0 +1,45 @@
+<!-- <ion-header>
+  <ion-toolbar style="--border-width: 0">
+    <ion-title class="ion-text-center" style="font-size: 20px;">{{ gamename }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCloseMenu('quit')" color="dark"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+
+<ion-grid style="flex: 1; position: sticky;" *ngIf="gameHasBegun">
+  <ion-row>
+    <ion-col size="6">  
+      <ion-button color="white" style="color: black;" class="ion-text-center no-ripple" expand="full" (click)="onPause()" >
+        {{ isPaused ? 'Resume' : 'Pause' }}
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button color="white" style="color: black;" class="ion-text-center no-ripple" expand="full" (click)="onStart()">
+        Restart
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<!-- the menu -->
+<!-- <ion-menu side="start" contentId="pause" menuId="pause" (ionDidClose)="onCloseMenu('resume')">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>{{ gameHasBegun ? 'Pause' : 'Menu' }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <div *ngIf="gameHasBegun">
+        <ion-item (click)="onCloseMenu()">Resume</ion-item>
+        <ion-item (click)="onCloseMenu('restart')">Restart</ion-item>
+      </div>
+      <ion-item (click)="onCloseMenu('quit')">Quit To Home</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu> -->
+
+

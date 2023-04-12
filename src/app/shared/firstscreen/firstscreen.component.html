@@ -1,0 +1,38 @@
+<div class="ion-page">
+  <ion-content>
+    <ion-slides pager="true" [options]="slideOpts" (ionSlideReachEnd)="enableDismiss()">
+      <ion-slide>
+        <ion-label class="padding">
+          <h1 class="padding">Welcome to Memory!</h1>
+          <h4 class="padding-sm">This app tests your cognitive ability using various fun games and tasks. You can choose to play multiple games, track your progress, and level up, or use one of the exercise sets, which are challenging combinations of various games.</h4>
+        </ion-label>
+      </ion-slide>
+      <ion-slide>
+        <ion-label class="padding">
+          <h1 class="padding">Navigating the Screen</h1>
+          <h3 class="padding-sm">On the bottom of your homescreen is the navigation bar.</h3>
+          <h4 class="padding-sm"><div class="bold">Exercise Sets</div>Takes you to the screen with different games combined into playing sets. You can choose to play an exercise set by simply clicking on it</h4>
+          <h4 class="padding-sm"><div class="bold">Games List</div>Takes you to the list of games, each with their own levels and points. To play a game, click on its name and begin</h4>
+          <h4 class="padding-sm"><div class="bold">Settings</div>Takes you to your profile and information.</h4>
+          <h4 class="padding-sm"><div class="bold">Progress Dashboard</div>Shows where you are in the games and exercise sets and how you have improved over time</h4>
+        </ion-label>
+      </ion-slide>
+      <ion-slide>
+        <ion-label class="padding">
+          <h1 class="padding">When Playing a Game</h1>
+          <h4 class="padding-sm"><div class="bold">Total Points</div>Shows how many points you have in this level out of 200. Once you have 200 points, you can move on to the next level. If you play your entire round correctly, you can earn 50 points. Any incorrect selections or incomplete rounds will lose you 5 points. You can see oyur total points at the end of a level.</h4>
+          <h4 class="padding-sm"><div class="bold">Timer</div>Shows how much  you have left in a round or how long you are taking in the round</h4>
+          <h4 class="padding-sm"><div class="bold">Menu Bar</div>You can Pause, Restart or Quit a round by using the Menu Bar. Remember that your progress will not be saved if you quit the round!</h4>
+        </ion-label>
+      </ion-slide>
+    </ion-slides>      
+    <ion-grid *ngIf="slide3">
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button  (click)="onDismissModal()">Close</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+  </ion-content>
+</div>

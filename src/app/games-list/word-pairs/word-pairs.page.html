@@ -1,0 +1,124 @@
+<app-header [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-header>
+<app-score *ngIf="gameHasBegun" [(level)]="level" [(score)]="scoring"></app-score>
+
+<ion-content scroll-Y="true">
+    <div *ngIf="gameHasBegun && !formsIsHidden && wordsShow" class = "middle">
+        <ion-row > 
+          <ion-col [@anime]="anime" class="ion-text-center"> 
+            <ion-label> <h1>{{currentItem}}</h1></ion-label>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <!-- <div  *ngIf="formsIsHidden && inputForAnswer" class = "ion-text-center">
+        <ion-grid style="flex: 1; position: sticky;">
+          <ion-row>
+            <ion-col> 
+            <img src = "../assets/word-finder/level_icon.png">
+             <h6 >Level: {{ level }}</h6> 
+          </ion-col>
+          <ion-col>
+            <img src = "../assets/word-finder/point_icon.png">
+             <h6 >Points: {{ scoring }}</h6>
+          </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div> -->
+      <!-- push changes test -->
+
+      <div *ngIf="formsIsHidden && inputForAnswer && !variation ">
+        
+        <ion-row >
+            <ion-col class="ion-text-center">
+                <!-- <h2 >{{str}}</h2> -->
+                <ion-button color = "light" style = "width: 80%" [disabled] = "true" size = "large" class = "shadow"><ion-text ><h3>{{str}}</h3></ion-text></ion-button>
+            </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngFor="let entry of choosingArray;index as i" size = "6" class = "ion-text-center">
+          <!-- <ion-list> -->
+            
+              <!-- <ion-item *ngFor="let entry of choosingArray;index as i"> -->
+                <!-- <label  >{{entry.name}}</label> -->
+                <!-- <input slot = "end" type="radio" name="radAnswer" (click)="aTestVar(i)" /> -->
+                <!-- <ion-radio slot="end" type="radio" (click)="aTestVar(i)" ></ion-radio>  -->
+                <ion-button #first ion-button color = "medium" style = "width: 80%" size = "large" class = "shadow-answers" (click)="aTest(i, first)" >{{entry.val}}</ion-button> 
+
+            <!-- </ion-item> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button (click)="sign()">Submit</ion-button>
+          </ion-col>
+        </ion-row>
+       
+      </div>
+  
+      <div *ngIf="formsIsHidden && inputForAnswer && variation">
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <!-- <h2 style = "width: 80%" class="shadow">{{str}}</h2> -->
+                <ion-button color = "warning" style = "width: 80%" [disabled] = "true" size = "large" class = "shadow"><ion-text ><h3>{{str}}</h3></ion-text></ion-button>
+
+            </ion-col>
+      </ion-row>
+      <ion-row>
+              <ion-col *ngFor="let entry of choosingArray;index as i" size = "6" class = "ion-text-center">
+                <!-- <ion-list> -->
+                  
+                    <!-- <ion-item *ngFor="let entry of choosingArray;index as i"> -->
+                      <!-- <label  >{{entry.name}}</label> -->
+                      <!-- <input slot = "end" type="radio" name="radAnswer" (click)="aTestVar(i)" /> -->
+                      <!-- <ion-radio slot="end" type="radio" (click)="aTestVar(i)" ></ion-radio>  -->
+                      <ion-button #first ion-button color = "medium" style = "width: 80%" size = "large" class = "shadow-answers" (click)="aTestVar(i, first)" >{{entry.name}}</ion-button> 
+
+                  <!-- </ion-item> -->
+                </ion-col>
+              </ion-row>
+                  <!-- <ion-radio-group> </ion-radio-group> -->
+                <!-- </ion-list> -->
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button (click)="sign()">Submit</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <!-- <div *ngIf="winScreen" class = "middle"> 
+        <ion-row> 
+          <ion-col class="ion-text-center"> 
+            <ion-button (click)="randStart()">Next Round</ion-button>  
+          </ion-col> 
+        </ion-row>
+      </div> 
+
+      <div *ngIf="loseScreen" class = "middle"> 
+        <ion-row> 
+            <ion-col class="ion-text-center"> 
+              <ion-button (click)="randStart()">Next Round</ion-button>       
+            </ion-col> 
+          </ion-row>
+          <ion-row>
+              <ion-col class="ion-text-center">
+                <label>The correct pair was </label>
+                <p>{{xqc}}</p>
+              </ion-col>
+          </ion-row>
+      </div > -->
+      
+      <div *ngIf = "doneWithWordPairs" class = "middleRed">
+        <ion-row> 
+            <ion-col class="ion-text-center"> 
+                <label button (click)="goAnOtherPage()">Go To Home Page </label>    
+            </ion-col> 
+          </ion-row>
+      </div>
+      <app-description [(gameno)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-description>
+</ion-content>
+
+<ion-footer>
+  <app-menu [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-menu>
+  <app-start [(gameno)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-start>
+</ion-footer>
+

@@ -1,0 +1,30 @@
+<app-header [(gamenumber)]="gameno" [(gameHasBegun)]="!startSeen" ></app-header>
+<app-description [(gameHasBegun)]="gameOn" [(startButtonIsDisabled)]="startButtonIsDisabled" [(gameno)]="gameno"></app-description>
+
+
+<app-score *ngIf="gameOn" [(level)]="currentLevel" [(score)]="levelArray[this.currentLevel-1].totalScore"></app-score>
+
+<ion-content *ngIf="!gameOn && !excerciseMode"></ion-content>
+
+<ion-content *ngIf="gameOn" padding class="background">
+
+<h3 style="text-align: center"><strong>{{ question }}</strong></h3>
+  
+<ion-button 
+      id= "{{cardSeen==true ? 'roundBlur': 'round'}}"
+      *ngFor="let element of buttonArray; index as i"  
+      fill= "clear"
+      color ="dark"
+      shape = "round"
+      [ngStyle]="{'background':getColor(element.color)}"
+      class="buttons"
+     (click)="checkAnswer(i, element.color, element.value, element.box)" (click)="element.clicked='true'" [disabled]="element.disable"> 
+    {{ element.value }}
+</ion-button>
+
+</ion-content>
+
+<ion-footer>
+  <app-menu [(gamenumber)]="gameno" [(gameHasBegun)]="gameOn" ></app-menu>
+  <app-start [(gameHasBegun)]="gameOn" [(gameno)]="gameno"></app-start>
+</ion-footer>

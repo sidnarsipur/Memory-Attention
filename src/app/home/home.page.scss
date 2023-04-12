@@ -1,0 +1,14 @@
+.horizontal-scroll {
+    overflow-x: scroll;
+}
+
+.tab-selected {
+    border: 2px solid white;
+}
+
+ion-tab-button {
+    --background: var(--ion-color-start);
+    --color: #ffffff;
+    --color-selected: #ffffff;
+}
+

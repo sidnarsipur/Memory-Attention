@@ -1,0 +1,64 @@
+
+<app-header [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-header>
+
+<app-description [(gameHasBegun)]="gameHasBegun"  [(gameno)]="gameno"></app-description>
+
+<app-score *ngIf="gameHasBegun" [(score)]="score" [(level)]="this.getLevel()[0]"></app-score>
+
+<ion-content *ngIf="!gameHasBegun && !excerciseMode"></ion-content>
+
+<!-- the menu functions and UI needs to be tested for this gamme -->
+
+<!-- 20 Buttons -->
+<!-- <ion-content *ngIf="gameHasBegun">
+    <ion-button 
+        mode="ios"
+        style="text-transform: none;"
+        [color]="item.color" 
+        shape="round" 
+        *ngFor="let item of array; index as i" 
+        (click)="onClickChip(item.text, i)" 
+        [disabled]="isDisabled(item.text)" 
+        class="absolute" 
+        [ngStyle]="{'top': top[i] + 'px','left': left[i] + 'px','width': getRadius() + 10 + 'px', 'height': getRadius() + 'px', 'font-size': getRadius()/3.5 + 'px'}">
+        {{ item.text }}
+    </ion-button>
+    <ion-label><p class="ion-text-center">{{ instructionsarray[getLevel()[0] - 1] }}</p></ion-label>
+
+</ion-content> -->
+
+<!-- This part is the main code that codes for all 20 buttons. It is an ngFor and has many customizable aspects -->
+<ion-content *ngIf="gameHasBegun" scrollY="false">
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let item of array; index as i" >
+                <ion-button
+                mode="ios"
+                style="text-transform: none;"
+                [color]="item.color" 
+                shape="round" 
+                (click)="onClickChip(item.text, i)" 
+                [disabled]="isDisabled(item.text)" 
+                class="absolute" 
+                [ngStyle]="{'top': top[i] + 'px','left': left[i] + 'px','width': getRadius() + 10 + 'px', 'height': getRadius() + 'px', 'font-size': (getRadius()/3.5 + 4) + 'px'}">
+                    {{ item.text }}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<!-- <ion-footer *ngIf="gameHasBegun" translucent="true">
+    <ion-toolbar>
+        <ion-title>
+            Level: {{getLevel()}}; Score: {{score}}
+        </ion-title>
+    </ion-toolbar>
+</ion-footer> -->
+
+<!-- <app-score *ngIf="gameHasBegun" [(level)]="getLevel()" [(score)]="score"></app-score> -->
+
+<ion-footer>
+    <app-menu [(gamenumber)]="gameno" [(gameHasBegun)]="gameHasBegun" ></app-menu>
+    <app-start [(gameHasBegun)]="gameHasBegun" [(gameno)]="gameno"></app-start>
+</ion-footer>
+

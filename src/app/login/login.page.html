@@ -1,0 +1,61 @@
+<!-- has the forgot password function and title of the page -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="!forgotPasswordMode">{{ loginMode ? "Log In" : "Sign Up" }}</ion-title>
+    <ion-title *ngIf="forgotPasswordMode">Forgot Password</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- the login page with the email and password and the submit button -->
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(); f.reset()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="form-group">
+            <ion-item>
+              <ion-label for="email" position="floating">
+                E-mail
+              </ion-label>   
+              <ion-input
+              type="email"
+              email
+              required
+              [(ngModel)]="email"
+              name="email"
+              id="email"
+              class="form-control"></ion-input>         
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!forgotPasswordMode">
+        <ion-col>
+          <div class="form-group">
+            <ion-item>
+              <ion-label for="password" position="floating">
+                Password
+              </ion-label>   
+              <ion-input
+              type="password"
+              required
+              [(ngModel)]="password"
+              name="password"
+              id="password"
+              class="form-control"
+              minlength="6"></ion-input>         
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <ion-button *ngIf="!forgotPasswordMode" [disabled]="!f.valid" type="submit">{{ loginMode ? "Log In" : "Sign Up"}}</ion-button>
+            <ion-label *ngIf="!forgotPasswordMode" class="ion-padding"> {{ loginMode ? "Don't have an account?" : "Already have an account?"}} <a (click)="loginMode = !loginMode">{{ loginMode ? "Sign Up" : "Log In" }}</a></ion-label>
+            <ion-button *ngIf="forgotPasswordMode"  (click)="forgotPassword()">Submit</ion-button>
+            <a class="ion-padding" (click)="forgotPasswordMode = !forgotPasswordMode" *ngIf="loginMode">{{ !forgotPasswordMode ? "Forgot Password?" : "Back"}}</a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
