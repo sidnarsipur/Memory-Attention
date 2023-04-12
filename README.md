@@ -6,7 +6,7 @@ Research showed that Cognitive Remediation Therapy (CRT) could be a viable treat
 
 # How to run
 
-The app is available at https://memoryattention-1.web.app/home. The app was built for devices. Run chrome's device mode to simulate a phone for the best UI experience.
+The app is available at https://memoryattention-1.web.app/home. The app was built for mobile devices. Run chrome's device mode to simulate a phone for the best UI experience.
 
 To run locally, you need to have node.js and npm set up first. (https://nodejs.org/en/). Open a new terminal window.
 
