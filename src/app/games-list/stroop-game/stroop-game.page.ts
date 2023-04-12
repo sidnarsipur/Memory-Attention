@@ -47,9 +47,9 @@ export class StroopGamePage implements OnInit {
   @Input('excerciseSet') excerciseMode = false;
   @Input('levels') levels;
 
-  ngOnInit() {
+  ngOnInit() { //Runs on component initilization 
 
-    this.database = this.eventemitter.databaseemitter.subscribe(value => {
+    this.database = this.eventemitter.databaseemitter.subscribe(value => { //Subscribe database from event emitter
       if (value.level){
         this.currentLevel = value.level}
       if (value.score){
@@ -60,7 +60,7 @@ export class StroopGamePage implements OnInit {
     this.gameService.getLevelScore(this.gameno, this.excerciseMode)
     this.data.sendlevel.subscribe(level => this.levelArray = level) 
     
-   this.subscription = this.eventemitter.gameStateSubj.subscribe(value => {
+   this.subscription = this.eventemitter.gameStateSubj.subscribe(value => { //Subscribe to game state from event emitter
           console.log(value)
           switch (value) {
             case 'start':
@@ -102,7 +102,7 @@ export class StroopGamePage implements OnInit {
       }}]}).then(alert=> alert.present())
   }
 
-  shuffle(array:Array<string>) { // Common shuffle algorithm used online
+  shuffle(array:Array<string>) { // Shuffle Array
     for (var i = array.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var temp = array[i];
@@ -112,7 +112,7 @@ export class StroopGamePage implements OnInit {
   return array;
   } 
 
-  createSecondPool(value:number, arr:string[]){ // For ratios in all questions
+  createSecondPool(value:number, arr:string[]){ // To decide the ratio of correct/wrong answers in color arrays
     let final: string[] = [] ;
 
     for(let count = 0; count<arr.length; count++){
@@ -134,7 +134,7 @@ export class StroopGamePage implements OnInit {
     return final
   }
 
-  createPool(arr: string[],answer:string, index: number){ // For ratios in all questions
+  createPool(arr: string[],answer:string, index: number){ // To decide the ratio of correct/wrong answers in button arrays
     let final: string[] = [] ;
 
     let correctPush = Math.round((this.levelArray[index].ratio / 100) * this.levelArray[index].elementCount)
@@ -152,7 +152,7 @@ export class StroopGamePage implements OnInit {
    return this.shuffle(final) ;
   }
 
-  booleanPool(trueValue: number, falseValue: number){ // For ratios in the box-type questions
+  booleanPool(trueValue: number, falseValue: number){ // To decide the ratio of correct/wrong answers in box arrays
     let arr: string[] = [];
 
     for(let i = 0; i<trueValue; i++){
@@ -215,69 +215,8 @@ createTypeOne(){ // Creates question of word type
 this.switchColor(0, 'normal')
 this.gameService.startTimer()
 }
-
-switchColor(i: number, state: string){
-
-      this.currentIndex = i;
-      if (i < this.buttonArray.length){
-      this.buttonArray[i].disable = false
-    
-      this.timeVar = setTimeout(() => {
-
-      this.buttonArray[i].disable = true
-      
-      if (this.buttonArray[i].clicked == false && this.buttonArray[i].value == this.answer){
-        if(i == this.buttonArray.length -1){
-          console.log("CHECK CHECK CHECK")
-           this.checkAnswer(i, this.buttonArray[i].color, this.buttonArray[i].value, this.buttonArray[i].box)
-        }
-        this.wrongs++
-        this.roundScore = this.gameService.getScore(this.levelArray[this.currentLevel-1].elementCount, this.wrongs)
-        this.levelArray[this.currentLevel-1].totalScore = this.roundScore + this.constant
-        this.switchColor(i+1, 'normal')
-      }
-
-      if (this.buttonArray[i].clicked == false && this.buttonArray[i].value != this.answer){
-        this.switchColor(i+1, 'normal')
-      }
-
-      console.log("Changed" + this.buttonArray[i])
-    }, 3000)  
-  }}
-
-switchColorTwo(i: number, state: string){
-
-  this.currentIndex = i;
-  if (i < this.buttonArray.length){
-
-  this.buttonArray[i].disable = false
   
-  this.timeVar = setTimeout(() => {
-
-  this.buttonArray[i].disable = true
-  
-  if (this.buttonArray[i].clicked == false && this.buttonArray[i].color == this.answer){
-     if(i == this.buttonArray.length -1){
-        console.log("CHECK CHECK CHECK")
-         this.checkAnswer(i, this.buttonArray[i].color, this.buttonArray[i].value, this.buttonArray[i].box)
-      }
-    this.wrongs++
-    this.roundScore = this.gameService.getScore(this.levelArray[this.currentLevel-1].elementCount, this.wrongs)
-    this.levelArray[this.currentLevel-1].totalScore = this.roundScore + this.constant
-    this.switchColorTwo(i+1, 'normal')
-  }
-
-  if (this.buttonArray[i].clicked == false && this.buttonArray[i].color != this.answer){
-    this.switchColorTwo(i+1, 'normal')
-  }
-  this.buttonArray[i].color = "white"
-  console.log("Changed" + this.buttonArray[i])
-}, 3000)  
-}}
-
-createTypeTwo(){ // Creates question of color type
-  
-
+ createTypeTwo(){ // Creates question of color type
   if (this.loopCount >= this.levelArray[this.currentLevel-1].wordPool.length){
     this.loopCount = 0 }
   this.answer = (this.levelArray[this.currentLevel-1].colorPool[this.loopCount])
@@ -302,6 +241,62 @@ createTypeTwo(){ // Creates question of color type
   this.switchColorTwo(0, 'normal')
 }
 
+switchColor(i: number, state: string){ //Change the color of a box for word type questions
+
+      this.currentIndex = i;
+      if (i < this.buttonArray.length){
+      this.buttonArray[i].disable = false
+    
+      this.timeVar = setTimeout(() => {
+
+      this.buttonArray[i].disable = true
+      
+      if (this.buttonArray[i].clicked == false && this.buttonArray[i].value == this.answer){
+        if(i == this.buttonArray.length -1){
+           this.checkAnswer(i, this.buttonArray[i].color, this.buttonArray[i].value, this.buttonArray[i].box)
+        }
+        this.wrongs++
+        this.roundScore = this.gameService.getScore(this.levelArray[this.currentLevel-1].elementCount, this.wrongs)
+        this.levelArray[this.currentLevel-1].totalScore = this.roundScore + this.constant
+        this.switchColor(i+1, 'normal')
+      }
+
+      if (this.buttonArray[i].clicked == false && this.buttonArray[i].value != this.answer){
+        this.switchColor(i+1, 'normal')
+      }
+
+      console.log("Changed" + this.buttonArray[i])
+    }, 3000)  
+  }}
+
+switchColorTwo(i: number, state: string){ //Change the color of a box for color type questions
+
+  this.currentIndex = i;
+  if (i < this.buttonArray.length){
+
+  this.buttonArray[i].disable = false
+  
+  this.timeVar = setTimeout(() => {
+
+  this.buttonArray[i].disable = true
+  
+  if (this.buttonArray[i].clicked == false && this.buttonArray[i].color == this.answer){
+     if(i == this.buttonArray.length -1){
+         this.checkAnswer(i, this.buttonArray[i].color, this.buttonArray[i].value, this.buttonArray[i].box)
+      }
+    this.wrongs++
+    this.roundScore = this.gameService.getScore(this.levelArray[this.currentLevel-1].elementCount, this.wrongs)
+    this.levelArray[this.currentLevel-1].totalScore = this.roundScore + this.constant
+    this.switchColorTwo(i+1, 'normal')
+  }
+
+  if (this.buttonArray[i].clicked == false && this.buttonArray[i].color != this.answer){
+    this.switchColorTwo(i+1, 'normal')
+  }
+  this.buttonArray[i].color = "white"
+  console.log("Changed" + this.buttonArray[i])
+}, 3000)  
+}}
 
 checkAnswer(index, colorValue: string, wordValue: string, boxValue: string){ //Main answer checking function
 
@@ -509,8 +504,6 @@ nextRound(){ // To move on to the next round
   this.roundScore = 0;
   this.cardSeen=false
 
-
-  
   //this.createLevel()
   this.onStart()
 }
@@ -586,27 +579,24 @@ onRestart(){ // If restart in menu is clicked
 }
 
 onResume(){ // If resume in menu is clicked
-  
+  //Not required anymore
 }
 
-onPause(){
+onPause(){ // When game is paused
   clearTimeout(this.timeVar)
 }
 
 quitGame(){ // If quit game in menu is clicked
   this.gameOn = false;
   let timer = this.gameService.clearTimer()
+  
   clearTimeout(this.timeVar)
+  
   this.levelArray[this.currentLevel-1].totalScore = this.levelArray[this.currentLevel-1].totalScore - this.roundScore
   this.gameService.storeLevelScore(this.gameno, this.levelArray[this.currentLevel-1].totalScore, this.currentLevel, this.excerciseMode, timer, this.wrongs, this.constant, this.currentLevel-1)
   this.router.navigate(['/home'])
 }
 
-resetGame(){}
-
-endGame(){ 
-
-}
 
 getColor(value: string) { // To get the colors of the buttons
   switch (value){
@@ -626,7 +616,6 @@ getColor(value: string) { // To get the colors of the buttons
       return '#6b2f01'
     case 'White':
       return '#ffffff'
-
   }}
 
  getFill(value) { // To get the fill of the buttons 
