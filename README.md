@@ -1,6 +1,6 @@
 # About 
 
-Research showed that Cognitive Remediation Therapy (CRT) could be a viable treatment to treat cognitive difficulties for patients with Schizophrenia. Based on this research, I was part of a team that build an app/website implementing CRT through game-like exercises. 
+[Research](https://docs.google.com/document/d/15mgaPBYOn9pM9xxwnZbp1n9Jr5v6IE1m/edit?usp=sharing&ouid=117239413994191668415&rtpof=true&sd=true) shows that Cognitive Remediation Therapy (CRT) could be a viable treatment to treat cognitive difficulties for patients with Schizophrenia. I was part of a team that built an app implementing CRT through game-like exercises in an attempt to test and provide data. 
 
 ![Scene](https://imgur.com/MskTFn0.png)
 
